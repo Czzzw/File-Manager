@@ -4,6 +4,14 @@ import os
 import re
 import shutil
 import time
+import logging
+
+# 配置日志
+logging.basicConfig(level=logging.INFO)
+
+# 创建日志
+logger = logging.getLogger(__name__)
+
 
 
 def updateNfo(filePath, match, new_content=None):
@@ -138,7 +146,6 @@ def renameDir(filePath):
                     print(root, '|', os.path.join(os.path.dirname(root), max_prefix))
                     os.rename(root, os.path.join(os.path.dirname(root), max_prefix))
 
-
 def renameTorrent(filePath):
     """
     重命名种子文件
@@ -155,7 +162,6 @@ def renameTorrent(filePath):
             else:
                 print(root, ' | 种子文件不唯一，跳过')
                 continue
-
 
 def find_max_prefix(arr):
     """
@@ -215,22 +221,14 @@ def mkdir_and_movefile(filePath):
 
 if __name__ == '__main__':
     start_time = time.time()
-    filePath = r'F:\test'
-    failed_path = r'E:\完美\0-刮削\failed'
+    filePath = r'C:\Users\Czzzw\Desktop\测试'
+    # failed_path = r'E:\完美\0-刮削\failed'
     # renameTorrent(filePath)
     # renameDir(filePath)
     # check_mp4_and_nfo_files(filePath, failed_path)
     # renameNfo(filePath)
     # updateNfo(filePath, 'num', '1')
-    mkdir_and_movefile(filePath)
-
-
-
-
-
-
-
-
+    # mkdir_and_movefile(filePath)
 
 
 
