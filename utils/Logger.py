@@ -12,11 +12,10 @@ class Logger:
 
     def get_common_logger(self):
         logger = logging.getLogger('CLogger')
-        level = self.config.get('common', 'level')
-        format = self.config.get('common', 'format')
-        datefmt = self.config.get('common', 'datefmt')
-        filename = self.config.get('common', 'filename')
-        handlers = self.config.get('common', 'handlers')
+        level = self.get_config('common', 'level')
+        format = self.get_config('common', 'format')
+        datefmt = self.get_config('common', 'datefmt')
+        filename = self.get_config('common', 'filename')
         file_handler = logging.FileHandler(filename)
         file_handler.setFormatter(logging.Formatter(format))
         steam_handler = logging.StreamHandler(sys.stdout)
@@ -30,11 +29,10 @@ class Logger:
 
     def get_special_logger(self):
         logger = logging.getLogger('SLogger')
-        level = self.config.get('special', 'level')
-        format = self.config.get('special', 'format')
-        datefmt = self.config.get('special', 'datefmt')
-        filename = self.config.get('special', 'filename')
-        handlers = self.config.get('special', 'handlers')
+        level = self.get_config('special', 'level')
+        format = self.get_config('special', 'format')
+        datefmt = self.get_config('special', 'datefmt')
+        filename = self.get_config('special', 'filename')
         file_handler = logging.FileHandler(filename)
         file_handler.setFormatter(logging.Formatter(format))
         steam_handler = logging.StreamHandler(sys.stdout)
@@ -45,18 +43,22 @@ class Logger:
             logger.addHandler(steam_handler)
         return logger
 
+    def get_config(self, section, key):
+        if self.config.has_section(section):
+            return self.config.get(section, key)
+        else:
+            raise KeyError(f"Section {section} not found in the configuration file")
 
 
 
-
-if __name__ == '__main__':
-    logger = Logger()
-    CLogger = logger.get_common_logger()
-    SLogger = logger.get_special_logger()
-    CLogger.info('xixi')
-    CLogger.debug('xixi')
-    SLogger.info('xixi')
-    SLogger.debug('xixi')
+# if __name__ == '__main__':
+#     logger = Logger()
+#     CLogger = logger.get_common_logger()
+#     SLogger = logger.get_special_logger()
+#     CLogger.info('xixi')
+#     CLogger.debug('xixi')
+#     SLogger.info('xixi')
+#     SLogger.debug('xixi')
 
 
 

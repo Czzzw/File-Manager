@@ -6,12 +6,10 @@ import shutil
 import time
 import logging
 
-# 配置日志
-logging.basicConfig(level=logging.INFO)
 
-# 创建日志
-logger = logging.getLogger(__name__)
-
+logger = Logger()
+CLogger = logger.get_common_logger()
+SLogger = logger.get_special_logger()
 
 
 def updateNfo(filePath, match, new_content=None):
